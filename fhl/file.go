@@ -3,6 +3,7 @@ package fhl
 import (
 	"bufio"
 	"encoding/json"
+	"fmt"
 	"io"
 	"os"
 )
@@ -47,23 +48,23 @@ func (f *FHL) LoadPrecalFile(path string) *FHL {
 }
 
 func (f *FHL) SavePrecal() *FHL {
+	fmt.Println("SavePrecal")
 	file, err := os.Create("data/2c-precal.json")
 	defer file.Close()
 	if err != nil {
 		f.Error = err
 		return f
 	}
-	if b, err := json.Marshal(f); err == nil {
+	var b []byte
+	if b, f.Error = json.Marshal(f); f.Error == nil {
 		file.Write(b)
-		return nil
-	} else {
-		f.Error = err
-		return f
-	}
+	} 
+	return f
 }
 
 // 纠错数据
 func SavePrecalErrCorr(x []ErrCorrRecord) error {
+	println("SavePrecalErrCorr")
 	file, err := os.Create("data/2c-errcorr.bin")
 	defer file.Close()
 	if err != nil {
@@ -82,7 +83,7 @@ func SavePrecalErrCorr(x []ErrCorrRecord) error {
 	}
 
 	w.Flush()
-	println("save err:", count)
+	println("save errcorr len:", count)
 	return nil
 }
 

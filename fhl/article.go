@@ -215,15 +215,11 @@ func (f *FHL) Calculate() *FHL {
 	for i, c := range f.AllHotSentences {
 		fmt.Printf("%d 字：%d 句\n", i+ALL_HOT_LEN_MIN, len(c))
 	}
-
-	// f.furtherInit()
-	// if err :=  f.savePrecal(); err != nil {
-	// 	panic(err)
-	// }
 	return f
 }
 
 func (f *FHL) InitPrecal() *FHL {
+	fmt.Println("InitPrecal")
 	f.HotWordsFreq = make(map[string]int)
 
 	// 初始化高频词组合频次表，令其包括所有单字&单字、单字&双字、双字&双字的组合

@@ -1,6 +1,7 @@
 package fhl
 
 import (
+	"fmt"
 	"sort"
 )
 
@@ -29,6 +30,7 @@ func hash(rs []rune) HashType {
 }
 
 func (f *FHL) InitErrCorr() *FHL {
+	fmt.Println("InitErrCorr")
 	x := []ErrCorrRecord{}
 	for i, article := range f.Articles {
 		for j, s := range article.Content {
@@ -42,7 +44,7 @@ func (f *FHL) InitErrCorr() *FHL {
 			})
 		}
 	}
-	println("err len: ", len(x))
+	println("errcorr len: ", len(x))
 	sort.Slice(x, func(i, j int) bool {
 		return x[i].Hash < x[j].Hash
 	})
