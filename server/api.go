@@ -193,7 +193,6 @@ func UpAnswer(f *fhl.FHL) func(*gin.Context) {
 		var kws []fhl.IntPair
 		var change interface{}
 		if incorrectReason == "" {
-			fmt.Println(a, a.Subject)
 			kws, change = a.Subject.Answer(ans.Text, a.NextOne)
 			if kws == nil {
 				incorrectReason = "不审题"
