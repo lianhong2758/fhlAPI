@@ -101,7 +101,7 @@ func GetTopic(f *fhl.FHL) func(*gin.Context) {
 			Size:          top.Size,
 			ID:            top.ID,
 			SubjectString: subject.Dump(),
-			Subject: subject,
+			Subject:       subject,
 		}
 		Games.Set(top.ID, &AnswerResq{TopicResp: t})
 		ctx.JSON(200, RespCode{Code: 200, Message: "", Data: &t})
@@ -224,7 +224,7 @@ func UpAnswer(f *fhl.FHL) func(*gin.Context) {
 			a.Update = fmt.Sprint(change)
 			a.Text = a.History[len(a.History)-1].Dump()
 			a.HistoryText = fhl.CorrectAnswerToStringArr(a.History)
-			a.Reason=""
+			a.Reason = ""
 			ctx.JSON(200, RespCode{Code: 200, Message: "", Data: a})
 			Games.Set(a.ID, a)
 		}
