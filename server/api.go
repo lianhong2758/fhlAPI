@@ -101,6 +101,7 @@ func GetTopic(f *fhl.FHL) func(*gin.Context) {
 			Size:          top.Size,
 			ID:            top.ID,
 			SubjectString: subject.Dump(),
+			Subject: subject,
 		}
 		Games.Set(top.ID, &AnswerResq{TopicResp: t})
 		ctx.JSON(200, RespCode{Code: 200, Message: "", Data: &t})
@@ -146,7 +147,7 @@ func UpAnswer(f *fhl.FHL) func(*gin.Context) {
 
 		a := Games.Get(ans.ID)
 		if a == nil {
-			ctx.JSON(200, RespCode{Code: 201, Message: "游戏已结束或已过期...", Data: nil})
+			ctx.JSON(200, RespCode{Code: 203, Message: "游戏已结束或已过期...", Data: nil})
 			return
 		}
 
@@ -192,6 +193,7 @@ func UpAnswer(f *fhl.FHL) func(*gin.Context) {
 		var kws []fhl.IntPair
 		var change interface{}
 		if incorrectReason == "" {
+			fmt.Println(a, a.Subject)
 			kws, change = a.Subject.Answer(ans.Text, a.NextOne)
 			if kws == nil {
 				incorrectReason = "不审题"
@@ -199,8 +201,8 @@ func UpAnswer(f *fhl.FHL) func(*gin.Context) {
 		}
 
 		if incorrectReason != "" {
-			a.Reason=incorrectReason
-			ctx.JSON(200, RespCode{Code: 200, Message: "", Data: a})
+			a.Reason = incorrectReason
+			ctx.JSON(200, RespCode{Code: 201, Message: "", Data: a})
 			Games.Set(a.ID, a)
 			return
 		}
@@ -214,7 +216,7 @@ func UpAnswer(f *fhl.FHL) func(*gin.Context) {
 			a.Text = a.History[len(a.History)-1].Dump()
 			a.HistoryText = fhl.CorrectAnswerToStringArr(a.History)
 			a.Reason = "游戏结束"
-			ctx.JSON(200, RespCode{Code: 201, Message: "End", Data: a})
+			ctx.JSON(200, RespCode{Code: 202, Message: "End", Data: a})
 			Games.Delete(a.ID)
 		} else {
 			//next
@@ -222,6 +224,7 @@ func UpAnswer(f *fhl.FHL) func(*gin.Context) {
 			a.Update = fmt.Sprint(change)
 			a.Text = a.History[len(a.History)-1].Dump()
 			a.HistoryText = fhl.CorrectAnswerToStringArr(a.History)
+			a.Reason=""
 			ctx.JSON(200, RespCode{Code: 200, Message: "", Data: a})
 			Games.Set(a.ID, a)
 		}
