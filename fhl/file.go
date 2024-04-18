@@ -20,31 +20,8 @@ func (f *FHL) LoadPrecalFile(path string) *FHL {
 		return f
 	}
 	f.Error = json.Unmarshal(data, f)
+	f.ArryToCount()
 	return f
-	// 打开 JSON 文件
-	// file, err := os.Open(path)
-	// if err != nil {
-	// 	f.Error = err
-	// 	return f
-	// }
-	// defer file.Close()
-
-	// // 创建一个新的 JSON 解码器
-	// decoder := json.NewDecoder(bufio.NewReader(file))
-	// // 循环读取 JSON 数据
-	// for {
-	// 	// 逐行解析 JSON 数据
-	// 	err := decoder.Decode(f)
-	// 	if err != nil {
-	// 		// 如果已经读取完所有数据，退出循环
-	// 		if err.Error() == "EOF" {
-	// 			break
-	// 		}
-	// 		f.Error = err
-	// 		return f
-	// 	}
-	// }
-	// return f
 }
 
 func (f *FHL) SavePrecal() *FHL {
@@ -55,6 +32,7 @@ func (f *FHL) SavePrecal() *FHL {
 		f.Error = err
 		return f
 	}
+	f.CountToArry()
 	var b []byte
 	if b, f.Error = json.Marshal(f); f.Error == nil {
 		file.Write(b)

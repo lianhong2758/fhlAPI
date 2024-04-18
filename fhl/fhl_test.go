@@ -35,5 +35,6 @@ func TestLookupText(t *testing.T) {
 	fmt.Println(y, f.GetArticle(a).Content[b:])
 	y, a, b = f.LookupText([]string{"江南好"})
 	fmt.Println(y, f.GetArticle(a).Content[b:])
+
+	fmt.Println(f.GenerateD(8))
 }
- 

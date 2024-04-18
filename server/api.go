@@ -85,7 +85,9 @@ func GetTopic(f *fhl.FHL) func(*gin.Context) {
 				UsedRight:  make([]bool, len(right)),
 			}
 		case "D":
+			fmt.Println("D 1")
 			left, right := f.GenerateD(top.Size)
+			fmt.Println("D 2")
 			subject = &fhl.SubjectD{
 				WordsLeft:  left,
 				WordsRight: right,

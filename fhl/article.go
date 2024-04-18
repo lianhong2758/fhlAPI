@@ -35,8 +35,12 @@ type FHL struct {
 	HotWords1 []string //1
 	HotWords2 []string //2
 	// 高频词的出现频数，单字和双字分开
-	HotWords1Count map[rune]int     `json:"-"`
-	HotWords2Count map[RunePair]int `json:"-"`
+	HotWords1Count map[rune]int
+
+	HotWords2Count    map[RunePair]int `json:"-"`
+	HotWords2CountKey []RunePair
+	HotWords2CountVal []int
+
 	// 全部都是高频字的句子
 	AllHotSentences [][]string
 
@@ -300,7 +304,7 @@ func (f *FHL) getHotWords(sentence string) ([]string, []string) {
 }
 
 func (f *FHL) DeleteCache() *FHL {
-	f.Articles = nil
+	clear(f.Articles)
 	runtime.GC()
 	return f
 }

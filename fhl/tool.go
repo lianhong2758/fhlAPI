@@ -74,7 +74,7 @@ func randomSample(n, count int) []int {
 }
 
 type CorrectAnswer struct {
-	Text string
+	Text     string
 	Keywords []IntPair
 }
 
@@ -96,4 +96,22 @@ func (a CorrectAnswer) Dump() string {
 		}
 	}
 	return b.String()
+}
+
+func (f *FHL) CountToArry() {
+	f.HotWords2CountKey = []RunePair{}
+	f.HotWords2CountVal = []int{}
+	for k, v := range f.HotWords2Count {
+		f.HotWords2CountKey = append(f.HotWords2CountKey, k)
+		f.HotWords2CountVal = append(f.HotWords2CountVal, v)
+	}
+}
+
+func (f *FHL) ArryToCount(){
+ f.HotWords2Count=map[RunePair]int{}
+	for k := range f. HotWords2CountKey {
+		 f.HotWords2Count[f.HotWords2CountKey[k]]=f.HotWords2CountVal[k]
+	}
+	clear(f.HotWords2CountKey)
+	clear(f.HotWords2CountVal)
 }
