@@ -37,7 +37,7 @@ func GetTopic(f *fhl.FHL) func(*gin.Context) {
 			ctx.JSON(200, RespCode{Code: 400, Message: "Bad Body: " + err.Error(), Data: nil})
 			return
 		}
-		fmt.Println(top)
+		fmt.Println("GetTopic: ",top)
 		// 检查 size
 		var errs string
 		switch top.ModType {
@@ -139,6 +139,7 @@ func UpAnswer(f *fhl.FHL) func(*gin.Context) {
 			ctx.JSON(200, RespCode{Code: 400, Message: "Bad Body: " + err.Error(), Data: nil})
 			return
 		}
+		fmt.Println("Answer: ", ans)
 		//去除逗号
 		ans.Text = strings.ReplaceAll(ans.Text, ",", " ")
 		ans.Text = strings.ReplaceAll(ans.Text, "，", " ")
