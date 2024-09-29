@@ -188,8 +188,7 @@ func (f *FHL) GenerateD(n int) ([]string, []string) {
 	count := 0
 	length := len(f.HotArticles)
 	//储存已被选择过的诗
-	var tmp map[int]int
-	tmp = make(map[int]int)
+	tmp := make(map[int]int)
 
 	for count < n {
 		i := rand.IntN(length)
