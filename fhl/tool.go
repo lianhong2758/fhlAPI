@@ -10,7 +10,7 @@ import (
 func parseArticle(id int, s string) (*Article, string) {
 	fields := strings.SplitN(s, "\t", 5)
 	if len(fields) < 5 {
-		panic("Incorrect dataset format")
+		panic("Incorrect dataset format,id:"+strconv.Itoa(id)+"s: "+s)
 	}
 	return &Article{
 		Id:      id,

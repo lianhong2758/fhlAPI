@@ -304,7 +304,7 @@ func (f *FHL) getHotWords(sentence string) ([]string, []string) {
 }
 
 func (f *FHL) DeleteCache() *FHL {
-	clear(f.Articles)
+	f.Articles=nil
 	runtime.GC()
 	return f
 }
