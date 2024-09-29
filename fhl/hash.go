@@ -1,8 +1,9 @@
 package fhl
 
 import (
-	"fmt"
 	"sort"
+
+	"github.com/sirupsen/logrus"
 )
 
 type HashType uint64
@@ -30,7 +31,7 @@ func hash(rs []rune) HashType {
 }
 
 func (f *FHL) InitErrCorr() *FHL {
-	fmt.Println("InitErrCorr")
+	logrus.Infoln("InitErrCorr")
 	x := []ErrCorrRecord{}
 	for i, article := range f.Articles {
 		for j, s := range article.Content {
@@ -44,7 +45,7 @@ func (f *FHL) InitErrCorr() *FHL {
 			})
 		}
 	}
-	println("errcorr len: ", len(x))
+	logrus.Info("errcorr len: ", len(x))
 	sort.Slice(x, func(i, j int) bool {
 		return x[i].Hash < x[j].Hash
 	})

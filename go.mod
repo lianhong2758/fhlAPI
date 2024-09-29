@@ -7,6 +7,7 @@ require (
 	github.com/FloatTech/ttl v0.0.0-20230307105452-d6f7b2b647d1
 	github.com/agnivade/levenshtein v1.1.1
 	github.com/gin-gonic/gin v1.9.1
+	github.com/sirupsen/logrus v1.9.0
 )
 
 require (
@@ -32,7 +33,6 @@ require (
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/pbnjay/memory v0.0.0-20210728143218-7b4eea64cf58 // indirect
 	github.com/pelletier/go-toml/v2 v2.0.8 // indirect
-	github.com/sirupsen/logrus v1.9.0 // indirect
 	github.com/twitchyliquid64/golang-asm v0.15.1 // indirect
 	github.com/ugorji/go/codec v1.2.11 // indirect
 	golang.org/x/arch v0.3.0 // indirect

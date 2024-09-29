@@ -8,6 +8,7 @@ import (
 	"strings"
 
 	"github.com/gin-gonic/gin"
+	"github.com/sirupsen/logrus"
 )
 
 type RespCode struct {
@@ -37,7 +38,7 @@ func GetTopic(f *fhl.FHL) func(*gin.Context) {
 			ctx.JSON(200, RespCode{Code: 400, Message: "Bad Body: " + err.Error(), Data: nil})
 			return
 		}
-		fmt.Println("GetTopic: ",top)
+		logrus.Infoln("GetTopic: ",top)
 		// 检查 size
 		var errs string
 		switch top.ModType {
@@ -139,7 +140,7 @@ func UpAnswer(f *fhl.FHL) func(*gin.Context) {
 			ctx.JSON(200, RespCode{Code: 400, Message: "Bad Body: " + err.Error(), Data: nil})
 			return
 		}
-		fmt.Println("Answer: ", ans)
+		logrus.Infoln("Answer: ", ans)
 		//去除逗号
 		ans.Text = strings.ReplaceAll(ans.Text, ",", " ")
 		ans.Text = strings.ReplaceAll(ans.Text, "，", " ")

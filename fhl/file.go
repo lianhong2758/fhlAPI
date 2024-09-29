@@ -3,9 +3,10 @@ package fhl
 import (
 	"bufio"
 	"encoding/json"
-	"fmt"
 	"io"
 	"os"
+
+	"github.com/sirupsen/logrus"
 )
 
 func (f *FHL) LoadDatasetFile(path string) *FHL {
@@ -25,8 +26,8 @@ func (f *FHL) LoadPrecalFile(path string) *FHL {
 }
 
 func (f *FHL) SavePrecal() *FHL {
-	fmt.Println("SavePrecal")
-	file, err := os.Create("data/2c-precal.json")
+	logrus.Info("SavePrecal")
+	file, err := os.Create(PrecalPath)
 	defer file.Close()
 	if err != nil {
 		f.Error = err
@@ -36,14 +37,14 @@ func (f *FHL) SavePrecal() *FHL {
 	var b []byte
 	if b, f.Error = json.Marshal(f); f.Error == nil {
 		file.Write(b)
-	} 
+	}
 	return f
 }
 
 // 纠错数据
 func SavePrecalErrCorr(x []ErrCorrRecord) error {
-	println("SavePrecalErrCorr")
-	file, err := os.Create("data/2c-errcorr.bin")
+	logrus.Info("SavePrecalErrCorr")
+	file, err := os.Create(ErrCorrPath)
 	defer file.Close()
 	if err != nil {
 		return err
@@ -61,7 +62,7 @@ func SavePrecalErrCorr(x []ErrCorrRecord) error {
 	}
 
 	w.Flush()
-	println("save errcorr len:", count)
+	logrus.Infoln("save errcorr len:", count)
 	return nil
 }
 

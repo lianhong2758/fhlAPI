@@ -2,11 +2,12 @@ package fhl
 
 import (
 	"bufio"
-	"fmt"
 	"os"
 	"runtime"
 	"sort"
 	"strings"
+
+	"github.com/sirupsen/logrus"
 )
 
 // 一篇诗词
@@ -125,8 +126,8 @@ func (f *FHL) Calculate() *FHL {
 		panic(err)
 	}
 
-	fmt.Printf("dataset: %d articles\n", len(f.Articles))
-	fmt.Printf("诗句总行数: %d, 总诗句字数: %d, 组合数%d\n", p, q, t)
+	logrus.Infof("dataset: %d articles\n", len(f.Articles))
+	logrus.Infof("诗句总行数: %d, 总诗句字数: %d, 组合数%d\n", p, q, t)
 
 	hotWords1List := byValueDesc{}
 	hotWords2List := byValueDesc{}
@@ -142,19 +143,19 @@ func (f *FHL) Calculate() *FHL {
 	sort.Sort(hotWords1List)
 	sort.Sort(hotWords2List)
 
-	fmt.Println("高频单字，每行五十个")
+	logrus.Infoln("高频单字，每行五十个")
 	for i := 0; i < 400; i++ {
-		fmt.Print(hotWords1List[i].string)
+		logrus.Info(hotWords1List[i].string)
 		if (i+1)%50 == 0 {
-			fmt.Println()
+			logrus.Infoln()
 		}
 		f.HotWords1 = append(f.HotWords1, hotWords1List[i].string)
 	}
-	fmt.Println("高频双字，每行二十个")
+	logrus.Infoln("高频双字，每行二十个")
 	for i := 0; i < 200; i++ {
-		fmt.Print(hotWords2List[i].string, " ")
+		logrus.Info(hotWords2List[i].string, " ")
 		if (i+1)%20 == 0 {
-			fmt.Println()
+			logrus.Infoln()
 		}
 		f.HotWords2 = append(f.HotWords2, hotWords2List[i].string)
 	}
@@ -215,15 +216,15 @@ func (f *FHL) Calculate() *FHL {
 			}
 		}
 	}
-	fmt.Println("仅由不重复的高频字组成的句子")
+	logrus.Infoln("仅由不重复的高频字组成的句子")
 	for i, c := range f.AllHotSentences {
-		fmt.Printf("%d 字：%d 句\n", i+ALL_HOT_LEN_MIN, len(c))
+		logrus.Infof("%d 字：%d 句\n", i+ALL_HOT_LEN_MIN, len(c))
 	}
 	return f
 }
 
 func (f *FHL) InitPrecal() *FHL {
-	fmt.Println("InitPrecal")
+	logrus.Infoln("InitPrecal")
 	f.HotWordsFreq = make(map[string]int)
 
 	// 初始化高频词组合频次表，令其包括所有单字&单字、单字&双字、双字&双字的组合
@@ -304,7 +305,7 @@ func (f *FHL) getHotWords(sentence string) ([]string, []string) {
 }
 
 func (f *FHL) DeleteCache() *FHL {
-	f.Articles=nil
+	f.Articles = nil
 	runtime.GC()
 	return f
 }
