@@ -1,7 +1,7 @@
 package server
 
 import (
-	"fhlApi/fhl"
+	"github.com/lianhong2758/fhlApi/fhl"
 
 	"github.com/gin-gonic/gin"
 )

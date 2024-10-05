@@ -1,4 +1,4 @@
-module fhlApi
+module github.com/lianhong2758/fhlApi
 
 go 1.23.0
 

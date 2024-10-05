@@ -2,7 +2,7 @@ package server
 
 import (
 	"encoding/json"
-	"fhlApi/fhl"
+	"github.com/lianhong2758/fhlApi/fhl"
 	"fmt"
 	"math/rand/v2"
 	"strings"
@@ -106,7 +106,6 @@ func GetTopic(f *fhl.FHL) func(*gin.Context) {
 		}
 		Games.Set(top.ID, &AnswerResq{TopicResp: t})
 		ctx.JSON(200, RespCode{Code: 200, Message: "", Data: &t})
-		return
 	}
 }
 
@@ -229,6 +228,5 @@ func UpAnswer(f *fhl.FHL) func(*gin.Context) {
 			ctx.JSON(200, RespCode{Code: 200, Message: "", Data: a})
 			Games.Set(a.ID, a)
 		}
-		return
 	}
 }
