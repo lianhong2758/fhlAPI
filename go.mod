@@ -1,6 +1,6 @@
-module fhlApi
+module fhlAPI
 
-go 1.22.0
+go 1.23.0
 
 require (
 	github.com/FloatTech/floatbox v0.0.0-20240304064110-78a83f1af9a6
