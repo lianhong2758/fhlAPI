@@ -1,4 +1,4 @@
-module fhlAPI
+module fhlApi
 
 go 1.23.0
 
