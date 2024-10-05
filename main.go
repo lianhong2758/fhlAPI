@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/lianhong2758/fhlApi/server"
+	"github.com/lianhong2758/fhlAPI/server"
 
 	"github.com/sirupsen/logrus"
 )

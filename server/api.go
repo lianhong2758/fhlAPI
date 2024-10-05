@@ -2,7 +2,7 @@ package server
 
 import (
 	"encoding/json"
-	"github.com/lianhong2758/fhlApi/fhl"
+	"github.com/lianhong2758/fhlAPI/fhl"
 	"fmt"
 	"math/rand/v2"
 	"strings"

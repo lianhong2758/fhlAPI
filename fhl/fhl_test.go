@@ -1,7 +1,7 @@
 package fhl_test
 
 import (
-	"github.com/lianhong2758/fhlApi/fhl"
+	"github.com/lianhong2758/fhlAPI/fhl"
 	"testing"
 
 	"github.com/sirupsen/logrus"

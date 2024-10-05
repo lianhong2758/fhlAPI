@@ -1,7 +1,7 @@
 package server
 
 import (
-	"github.com/lianhong2758/fhlApi/fhl"
+	"github.com/lianhong2758/fhlAPI/fhl"
 	"fmt"
 	"os"
 

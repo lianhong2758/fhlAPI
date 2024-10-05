@@ -28,11 +28,11 @@ func (f *FHL) LoadPrecalFile(path string) *FHL {
 func (f *FHL) SavePrecal() *FHL {
 	logrus.Info("SavePrecal")
 	file, err := os.Create(PrecalPath)
-	defer file.Close()
 	if err != nil {
 		f.Error = err
 		return f
 	}
+	defer file.Close()
 	f.CountToArry()
 	var b []byte
 	if b, f.Error = json.Marshal(f); f.Error == nil {
@@ -45,10 +45,10 @@ func (f *FHL) SavePrecal() *FHL {
 func SavePrecalErrCorr(x []ErrCorrRecord) error {
 	logrus.Info("SavePrecalErrCorr")
 	file, err := os.Create(ErrCorrPath)
-	defer file.Close()
 	if err != nil {
 		return err
 	}
+	defer file.Close()
 	w := bufio.NewWriter(file)
 
 	count := 0
